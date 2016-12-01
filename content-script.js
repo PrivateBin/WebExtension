@@ -86,7 +86,7 @@ if (document.title == "PrivateBin") {
     }
 
     var storageErrorHandler = function(error) {
-	console.log("Fetching hashes via XHR");
+	console.log("Fetching new hashes via XHR");
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', "https://gdr.name/hashes.json.gpg");
 	xhr.responseType = 'text';
@@ -100,14 +100,46 @@ if (document.title == "PrivateBin") {
 			console.log(err);
 			window.alert("PGP signature check failed: " + err);
 		    } else {
-			console.log(literals);
+			if (literals.length < 1) {
+			    window.alert("Received an empty hashes file");
+			    return;
+			}
 			var jsonResponse = JSON.parse(literals[0].toString());
-			/* TODO proper sanity check of the received file */
-			/* TODO signature validation */
-			if (typeof jsonResponse['hashes'] === 'undefined') {
+
+			/* Heavy sanity checking for the received JSON file */
+                        if (typeof jsonResponse != 'object') {
+			    window.alert("Received a malformed hashes JSON file: root element not an object");
+			    return;
+			}
+
+			if (typeof jsonResponse['last_modified'] != 'number') {
+			    window.alert("Received a malformed hashes JSON file: last_modified invalid");
+			    return;
+			}
+
+			if (typeof jsonResponse['hashes'] != 'object') {
 			    console.log(jsonResponse);
 			    window.alert("Received a fishy hashes file");
 			    return;
+			}
+
+			if (Object.getOwnPropertyNames(jsonResponse['hashes']).length < 1) {
+			    console.log(jsonResponse);
+			    window.alert("Received a malformed hashes JSON file: empty hashes object");
+			    return;
+			}
+
+			for (var version in jsonResponse['hashes']) {
+			    for (var scriptName in jsonResponse['hashes'][version]) {
+				if (typeof scriptName != 'string') {
+				    window.alert("Received a malformed hashes JSON file: found a non-string hashes key");
+				    return;
+				}
+				if (typeof jsonResponse['hashes'][version][scriptName] != 'string') {
+				    window.alert("Received a malformed hashes JSON file: found a non-string hashes value");
+				    return;
+				}
+			    }
 			}
 
 			getBrowser().storage.local.set({"privatebin": jsonResponse});
@@ -122,7 +154,9 @@ if (document.title == "PrivateBin") {
     };
 
     var storageRetrievedHandler = function(item) {
-	if (false && item && Object.getOwnPropertyNames(item).length > 0 && !getBrowser().runtime.lastError) {
+	var itemAge = (new Date().getTime() / 1000) - item['privatebin']['last_modified'];
+
+	if (itemAge < 7*24*3600 && item && Object.getOwnPropertyNames(item).length > 0 && !getBrowser().runtime.lastError) {
 	    checkScriptElements(item['privatebin']['hashes']);
 	} else {
 	    storageErrorHandler(null);
