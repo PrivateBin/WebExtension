@@ -13,7 +13,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content-script.js"]
+      "js": ["kbpgp-2.0.8-min.js", "content-script.js"]
     }
   ]
 }
