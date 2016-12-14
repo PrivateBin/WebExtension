@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="noindex">
+		<title>PrivateBin</title>
+		<link type="text/css" rel="stylesheet" href="valid_v1.0-Dateien/bootstrap-3.css">
+		<link type="text/css" rel="stylesheet" href="valid_v1.0-Dateien/bootstrap-theme-3.css">
+		<link type="text/css" rel="stylesheet" href="valid_v1.0-Dateien/privatebin.css">
+		<link type="text/css" rel="stylesheet" href="valid_v1.0-Dateien/prettify.css">
+		<script type="text/javascript" src="valid_v1.0-Dateien/jquery-1.js" integrity="sha512-xAERw8wHVOkM9x9y9/FvQ7g1t+gIQj39mfkN1Rd1OLcC5k/x2e6NO8hq6qEbb3oO+CYYTjVLFiFYg5/7ddF0zA==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/sjcl-1.js" integrity="sha512-BqVQ8GgWfMCcdsDuP6Ggm1BV7+mmoWH3PC4UqcYpEKSdEq1rthy6NUsa6gu5sydewbi/ilI3E3ohdCxlPPF9ww==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/base64-2.js" integrity="sha512-rbqAby7hObftbEoGQzkhUbEh5YkUn2MtekTLs4btvo2oly4CZ3DxhJzEh0u/rNzS54tcJdqi5Ug1ruugEd2U1g==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/rawdeflate-0.js" integrity="sha512-tTdZ7qMr7tt5VQy4iCHu6/aGB12eRwbUy+AEI5rXntfsjcRfBeeqJloMsBU9FrGk1bIYLiuND/FhU42LO1bi0g==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/rawinflate-0.js" integrity="sha512-g8uelGgJW9A/Z1tB6Izxab++oj5kdD7B4qC7DHwZkB6DGMXKyzx7v5mvap2HXueI2IIn08YlRYM56jwWdm2ucQ==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/bootstrap-3.js" integrity="sha512-/W33QnLmSAP1fwINS9iXgB6s/VOIG9GVdIuIYaUtbSvKPMv5S08PtT3PqnT2WjwBgB8DFeDN2nqJroqQYF7SwQ==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/prettify.js" integrity="sha512-m8iHxoN+Fe12xxFwWNdY/TS4KoFntHp29qY0xUzBnPd0bkKMOR/dFhEdTWydpt0b/fIXyhB+znGYUvgjfJ2RzQ==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/showdown-1.js" integrity="sha512-Kbz1FIlDnqUJu/3yW8H8USzURA3JuUqSKRwz13lM4kWt6C0n6s4tjl81PCfnWtE4gBIzyj5uGePcfUyotk/icw==" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="valid_v1.0-Dateien/privatebin.js" integrity="sha512-Jx4qD49amdzpNe9FLtxLO84Xt5LZeQ2PGaM0I9UCS2Kr4xhrnFyvP+0hrLIMgDTwjWFDpTSCoDHuj0SHzuqXuQ==" crossorigin="anonymous"></script>
+		<!--[if lt IE 10]>
+		<style type="text/css">body {padding-left:60px;padding-right:60px;} #ienotice {display:block;} #oldienotice {display:block;}</style>
+		<![endif]-->
+		<link rel="apple-touch-icon" href="https://privatebin.net/apple-touch-icon.png?1.0" sizes="180x180">
+		<link rel="icon" type="image/png" href="https://privatebin.net/favicon-32x32.png?1.0" sizes="32x32">
+		<link rel="icon" type="image/png" href="https://privatebin.net/favicon-16x16.png?1.0" sizes="16x16">
+		<link rel="manifest" href="https://privatebin.net/manifest.json?1.0">
+		<link rel="mask-icon" href="https://privatebin.net/safari-pinned-tab.svg?1.0" color="#ffcc00">
+		<link rel="shortcut icon" href="https://privatebin.net/favicon.ico">
+		<meta name="msapplication-config" content="browserconfig.xml">
+		<meta name="theme-color" content="#ffe57e">
+	<link rel="stylesheet" type="text/css" href="valid_v1.0-Dateien/socialwidgets.css"></head>
+	<body role="document">
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Navigation umschalten</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="reloadlink navbar-brand" href="">
+					<img alt="PrivateBin" src="valid_v1.0-Dateien/icon.svg" width="38">
+				</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>
+						<button id="newbutton" type="button" class="reloadlink btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-file" aria-hidden="true"></span> Neu
+						</button>
+						<button id="clonebutton" type="button" class="hidden btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span> Klonen
+						</button>
+						<button id="rawtextbutton" type="button" class="hidden btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-text-background" aria-hidden="true"></span> Reiner Text
+						</button>
+					</li>
+					<li class="dropdown">
+						<select id="pasteExpiration" name="pasteExpiration" class="hidden">
+							<option value="5min">5 Minuten</option>
+							<option value="10min">10 Minuten</option>
+							<option value="1hour">1 Stunde</option>
+							<option value="1day">1 Tag</option>
+							<option value="1week" selected="selected">1 Woche</option>
+							<option value="1month">1 Monat</option>
+							<option value="1year">1 Jahr</option>
+							<option value="never">Nie</option>
+						</select>
+						<a id="expiration" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ablaufzeit: <span id="pasteExpirationDisplay">1 Woche</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" data-expiration="5min">
+									5 Minuten
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="10min">
+									10 Minuten
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="1hour">
+									1 Stunde
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="1day">
+									1 Tag
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="1week">
+									1 Woche
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="1month">
+									1 Monat
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="1year">
+									1 Jahr
+								</a>
+							</li>
+							<li>
+								<a href="#" data-expiration="never">
+									Nie
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<div id="burnafterreadingoption" class="navbar-text checkbox">
+							<label>
+								<input id="burnafterreading" name="burnafterreading" type="checkbox">
+								Einmal-Text
+							</label>
+						</div>
+					</li>
+					<li>
+						<div id="opendisc" class="navbar-text checkbox">
+							<label>
+								<input id="opendiscussion" name="opendiscussion" type="checkbox">
+								Diskussion eröffnen
+						 	</label>
+						</div>
+					</li>
+					<li>
+						<div id="password" class="navbar-form">
+							<input id="passwordinput" placeholder="Passwort (empfohlen)" class="form-control" size="19" type="password">
+						</div>
+					</li>
+					<li class="dropdown">
+						<select id="pasteFormatter" name="pasteFormatter" class="hidden">
+							<option value="plaintext" selected="selected">Nur Text</option>
+							<option value="syntaxhighlighting">Quellcode</option>
+							<option value="markdown">Markdown</option>
+						</select>
+						<a id="formatter" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Format: <span id="pasteFormatterDisplay">Nur Text</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" data-format="plaintext">
+									Nur Text
+								</a>
+							</li>
+							<li>
+								<a href="#" data-format="syntaxhighlighting">
+									Quellcode
+								</a>
+							</li>
+							<li>
+								<a href="#" data-format="markdown">
+									Markdown
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<li>
+						<button id="sendbutton" type="button" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Senden
+						</button>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<header class="container">
+			<div id="remainingtime" role="alert" class="hidden alert alert-info">
+				<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			</div>
+			<div id="errormessage" role="alert" class="hidden alert alert-danger"><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> </div>
+			<noscript><div id="noscript" role="alert" class="nonworking alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Javascript ist eine Voraussetzung, um PrivateBin zu nutzen.<br />Bitte entschuldige die Unannehmlichkeiten.</div></noscript>
+			<div id="oldienotice" role="alert" class="hidden nonworking alert alert-danger"><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> PrivateBin setzt einen modernen Browser voraus, um funktionieren zu können.</div>
+			<div id="ienotice" role="alert" class="hidden alert alert-warning"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Du benutzt immer noch den Internet Explorer? Tu Dir einen Gefallen und wechsle zu einem moderneren Browser:
+				<a href="https://www.mozilla.org/firefox/">Firefox</a>,
+				<a href="https://www.opera.com/">Opera</a>,
+				<a href="https://www.google.com/chrome">Chrome</a>,
+				<a href="https://www.apple.com/safari">Safari</a>...
+			</div>
+			<div id="pasteresult" role="alert" class="hidden alert alert-success">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				<div id="deletelink"></div>
+				<div id="pastelink">
+				</div>
+			</div>
+			<ul id="preview" class="nav nav-tabs">
+				<li role="presentation" class="active"><a id="messageedit" href="#">Bearbeiten</a></li>
+				<li role="presentation"><a id="messagepreview" href="#">Vorschau</a></li>
+			</ul>
+		</header>
+		<section class="container">
+			<article class="row">
+				<div id="image" class="col-md-12 text-center hidden"></div>
+				<div id="prettymessage" class="col-md-12 hidden">
+					<pre id="prettyprint" class="col-md-12 prettyprint linenums:1"></pre>
+				</div>
+				<div id="cleartext" class="col-md-12 hidden"></div>
+				<p class="col-md-12"><textarea id="message" name="message" cols="80" rows="25" class="form-control"></textarea></p>
+			</article>
+		</section>
+		<section class="container">
+			<div id="discussion" class="hidden">
+				<h4>Diskussion</h4>
+				<div id="comments"></div>
+			</div>
+		</section>
+		<footer class="container">
+			<div class="row">
+				<h4 class="col-md-5 col-xs-8">PrivateBin <small>- Unwissenheit ist ein Segen</small></h4>
+				<p class="col-md-1 col-xs-4 text-center">1.0</p>
+				<p id="aboutbox" class="col-md-6 col-xs-12">
+					PrivateBin ist ein minimalistischer, quelloffener 
+"Pastebin"-artiger Dienst, bei dem der Server keinerlei Kenntnis der 
+Inhalte hat. Die Daten werden <i>im Browser</i> mit 256 Bit AES ver- und entschlüsselt. Weitere Informationen sind auf der <a href="https://privatebin.info/">Projektseite</a> zu finden.
+				</p>
+			</div>
+		</footer>
+		<div id="cipherdata" class="hidden"></div>
+	
+
+</body></html>
