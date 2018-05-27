@@ -2,7 +2,7 @@
 
 **PrivateBin browser extension to verify integrity of PrivateBin instances**
 
-**Work in progress!**
+**Attention: This has been depreciated and will not be continued.**
 
 This web extension was created out of the interest to secure PrivateBin installations even more. As even with many security features, which have been implemented in PrivateBin, one fundamental issue remains: [As a user you have to trust the server](https://github.com/PrivateBin/PrivateBin/wiki/FAQ#but-javascript-encryption-is-not-secure).
 
